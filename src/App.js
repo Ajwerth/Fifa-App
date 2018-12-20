@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { playerData } from "./data/players_data.js"
 import './App.css';
 
+console.log(playerData);
+
 class App extends Component {
+  
   render() {
+
+    const playerList = playerData.items.map((item) => {
+      let name;
+      item.commonName ? name = item.commonName : item.firstName ? name = item.firstName : name = "No Name";
+      return(
+        <li key={item.commonName+item.lastName} >{name}</li>
+      )
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ul>
+          {playerList}
+        </ul>
       </div>
     );
   }
