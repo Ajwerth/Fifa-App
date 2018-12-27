@@ -1,29 +1,32 @@
-import React, { Component } from 'react';
-import { playerData } from "./data/players_data.js"
-import './App.css';
+import React from 'react';
+import './css/App.css';
+import logo from './imgs/logo.png';
+import Players from './playerList.js';
+import{
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+} from 'react-router-dom';
 
-console.log(playerData);
-
-class App extends Component {
-  
-  render() {
-
-    const playerList = playerData.items.map((item) => {
-      let name;
-      item.commonName ? name = item.commonName : item.firstName ? name = item.firstName : name = "No Name";
-      return(
-        <li key={item.commonName+item.lastName} >{name}</li>
-      )
-    });
-
-    return (
-      <div className="App">
-        <ul>
-          {playerList}
-        </ul>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div className='App'>
+      <header className='App-header'>
+        <Link to='/'>
+          <img src={logo} className='App-logo' alt='logo' />
+        </Link>
+      </header>
+      <Switch>
+        <Route exact path='/' component={Players}/>
+        <Route path='/:id' component={Test}/>
+      </Switch>
+    </div>
+  </Router>
+);
 
 export default App;
+
+const Test = ({ match }) => (
+  <h1>{match.params.id}</h1>
+)
