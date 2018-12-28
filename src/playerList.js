@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { playerData } from "./data/players_data.js";
-import './css/lists.css';
 import{ Link } from 'react-router-dom';
-
+import Styled from 'styled-components';
 class Players extends Component {
   
   render() {
@@ -11,23 +10,28 @@ class Players extends Component {
       let name;
       item.commonName ? name = item.commonName : item.firstName ? name = item.firstName : name = "No Name";
       return(
-        <Link to={`/${item.id}`}>
-            <li key={item.commonName+item.lastName} >
-                    <img scr={item.headshot.imgUrl}/>
-                    {name}
-            </li>
-        </Link>
+        <PlayerGrid>
+            <Link to={`/${item.id}`}>
+                <li key={item.commonName+item.lastName} >
+                    <img scr={item.headshot.imgUrl} alt="Player Headshot"/>
+                    <h3>{name}</h3>
+                </li>
+            </Link>
+        </PlayerGrid>
       )
     });
 
     return (
       <div className="App">
-        <ul>
           {playerList}
-        </ul>
       </div>
     );
   }
 }
 
 export default Players;
+
+const PlayerGrid = Styled.ul`
+    list-style: none;
+    padding: 1rem;
+`;
