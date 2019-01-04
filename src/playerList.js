@@ -10,20 +10,20 @@ class Players extends Component {
       let name;
       item.commonName ? name = item.commonName : item.firstName ? name = item.firstName : name = "No Name";
       return(
-        <PlayerGrid>
+        <li key={item.commonName+item.lastName} >
             <Link to={`/${item.id}`}>
-                <li key={item.commonName+item.lastName} >
-                    <img scr={item.headshot.imgUrl} alt="Player Headshot"/>
-                    <h3>{name}</h3>
-                </li>
+              <img alt="Player Headshot" src={item.headshot.imgUrl}/>
+              <h3>{name}</h3>
             </Link>
-        </PlayerGrid>
+        </li>
       )
     });
 
     return (
       <div className="App">
+        <PlayerGrid>
           {playerList}
+        </PlayerGrid>
       </div>
     );
   }
@@ -34,4 +34,6 @@ export default Players;
 const PlayerGrid = Styled.ul`
     list-style: none;
     padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 `;
